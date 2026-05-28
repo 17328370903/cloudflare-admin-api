@@ -35,7 +35,7 @@
 	"observability": {
 		"enabled": true
 	},
-	"upload_source_maps": true
+	"upload_source_maps": true,
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
@@ -53,5 +53,12 @@
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
 	 */
-	// "vars": {  "MY_VARIABLE": "production_value" }
+	// "vars": {  "MY_VARIABLE": "production_value" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cloudflare-admin-api",
+      "database_id": "eaed2d2e-e9af-446b-99f0-5db82db93880"
+    }
+  ]
 }

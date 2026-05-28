@@ -6,6 +6,8 @@ interface __BaseEnv_CloudflareEnv {
 	ASSETS: Fetcher;
 	NEXTJS_ENV: string;
 	WORKER_SELF_REFERENCE: Fetcher /* coudflare-admin-api */;
+	DB: D1Database;
+	JWT_SECRET: string;
 }
 declare namespace Cloudflare {
 	interface Env extends __BaseEnv_CloudflareEnv {}
@@ -15,7 +17,7 @@ type StringifyValues<EnvType extends Record<string, unknown>> = {
 	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
 };
 declare namespace NodeJS {
-	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "NEXTJS_ENV">> {}
+	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "NEXTJS_ENV" | "JWT_SECRET">> {}
 }
 
 // Begin runtime types
