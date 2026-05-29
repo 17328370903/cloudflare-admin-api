@@ -8,7 +8,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "coudflare-admin-api",
+	"name": "cloudflare-admin-api",
 	"main": ".open-next/worker.js",
 	"compatibility_date": "2026-05-28",
 	"compatibility_flags": [
