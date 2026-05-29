@@ -14,6 +14,11 @@ export async function POST(request: NextRequest) {
 
 		const { env } = getCloudflareContext();
 		const db = env.DB;
+		const jwtSecret = env.JWT_SECRET || process.env.JWT_SECRET;
+
+		if (!jwtSecret) {
+			return NextResponse.json({ code: 500, message: "JWT_SECRET 未配置" }, { status: 500 });
+		}
 
 		const user = await db
 			.prepare("SELECT id, name, last_login_time, last_login_ip, created_at FROM users WHERE name = ? AND password = ?")
@@ -29,7 +34,7 @@ export async function POST(request: NextRequest) {
 
 		await db.prepare("UPDATE users SET last_login_time = ?, last_login_ip = ?, updated_at = ? WHERE id = ?").bind(now, ip, now, user.id).run();
 
-		const token = await createToken({ id: user.id, name: user.name }, env.JWT_SECRET);
+		const token = await createToken({ id: user.id, name: user.name }, jwtSecret);
 
 		return NextResponse.json({
 			code: 0,
